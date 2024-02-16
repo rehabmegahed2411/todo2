@@ -31,6 +31,8 @@ dependencies:
   
   calendar_timeline_sbk: ^1.1.7
   sqflite: ^2.0.0+3
+  sqflite_common_ffi: ^2.3.2+1
+
   path: ^1.8.0
   intl:
   flutter:

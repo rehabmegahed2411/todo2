@@ -1,9 +1,11 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class DatabaseHelper {
   static final _databaseName = "events_database.db";
   static final _databaseVersion = 1;
+  Database? db;
 
   static final table = 'events_table';
 
@@ -27,11 +29,8 @@ class DatabaseHelper {
 
   _initDatabase() async {
     String path = join(await getDatabasesPath(), _databaseName);
-    return await openDatabase(
-      path,
-      version: _databaseVersion,
-      onCreate: _onCreate,
-    );
+    var databaseFactory = databaseFactoryFfi;
+    db = await databaseFactory.openDatabase(path);
   }
 
   Future _onCreate(Database db, int version) async {
