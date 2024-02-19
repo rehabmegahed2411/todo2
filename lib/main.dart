@@ -1,5 +1,7 @@
 
 
+import 'dart:ffi';
+
 import 'package:calendar_timeline_sbk/calendar_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -52,7 +54,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _resetSelectedDate() {
-    _selectedDate = DateTime.now().add(const Duration(days: 2));
+    _selectedDate = DateTime.now().add(const Duration(days: 0));
   }
 
   void _resetSelectedTime() {
@@ -62,6 +64,7 @@ class _HomePageState extends State<HomePage> {
 
   void _showEventDialog() {
     showDialog(
+      
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -74,14 +77,19 @@ class _HomePageState extends State<HomePage> {
                 onChanged: (value) => _eventName = value,
                 controller: _eventNameController,
                 decoration: InputDecoration(
+                 // hintText: 'Your Event Name',
+                 // hintStyle: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color:Color(0xFF61A0A6) ),
+
                   labelText: 'Event Name',
                   labelStyle: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.bold),
                   border: OutlineInputBorder(
+                  
                     borderRadius: BorderRadius.circular(200),
-                    borderSide: BorderSide(color: Color.fromARGB(255, 186, 246, 231)),
+                    borderSide: BorderSide(color: Color(0xFF61A0A6)),
                   ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 3.0),
+                  contentPadding: EdgeInsets.symmetric(vertical: 1.0,horizontal: 50),
                 ),
+                keyboardType: TextInputType.name,
               ),
               SizedBox(height: 20),
               TextFormField(
@@ -89,8 +97,10 @@ class _HomePageState extends State<HomePage> {
                 readOnly: true,
                 decoration: InputDecoration(
                   labelText: 'Date',
+                  
                   labelStyle: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.bold),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(200)),
+                   contentPadding: EdgeInsets.symmetric(vertical: 1.0,horizontal: 50),
                 ),
                 controller: TextEditingController(text: DateFormat('yyyy-MM-dd').format(_selectedDate)),
               ),
@@ -103,8 +113,10 @@ class _HomePageState extends State<HomePage> {
                       readOnly: true,
                       decoration: InputDecoration(
                         labelText: 'Start Time',
-                        labelStyle: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.bold),
+                        
+                        labelStyle: TextStyle(color: const Color.fromARGB(255, 15, 10, 10), fontSize: 13, fontWeight: FontWeight.bold),
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(200)),
+                         contentPadding: EdgeInsets.symmetric(vertical: 1.0,horizontal: 20),
                       ),
                       controller: _selectedStartTimeController,
                     ),
@@ -118,12 +130,13 @@ class _HomePageState extends State<HomePage> {
                         labelText: 'End Time',
                         labelStyle: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.bold),
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(200)),
+                        contentPadding: EdgeInsets.symmetric(vertical: 1.0,horizontal: 25),
                       ),
                       controller: _selectedEndTimeController,
                     ),
                   ),
                 ],
-              ),
+              )
             ],
           ),
           actions: <Widget>[
